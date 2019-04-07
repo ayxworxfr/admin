@@ -23,23 +23,35 @@ public class UserHuntController {
      * 用户登录
      */
     @PostMapping("/login")
-    public ServerResponse<String> login() {
-        return ServerResponse.createBySuccess("success");
+    public ServerResponse<UserHunt> login(UserHunt userHunt) {
+        ServerResponse<UserHunt> serverResponse = userService.login(userHunt);
+        return serverResponse;
     }
 
     /**
      * 用户注册
      */
     @PostMapping("/regist")
-    public ServerResponse<String> regist() {
-        return ServerResponse.createBySuccess("success");
+    public ServerResponse<String> regist(UserHunt userHunt) {
+        ServerResponse<String> serverResponse = userService.regist(userHunt);
+        return serverResponse;
+    }
+
+    /**
+     * 用户重置密码
+     */
+    @PostMapping("/resetpassword")
+    public ServerResponse<String> resetPassword(UserHunt userHunt) {
+        ServerResponse<String> serverResponse = userService.resetPassword(userHunt.getJobId(),userHunt.getPhone(),userHunt.getPassword());
+        return serverResponse;
     }
 
     /**
      * 展示用户个人信息
      */
     @PostMapping("/message")
-    public ServerResponse<String> userMessage() {
-        return ServerResponse.createBySuccess("success");
+    public ServerResponse<String> userMessage(String jobId) {
+        ServerResponse<String> serverResponse = userService.userMessage(jobId);
+        return serverResponse;
     }
 }
