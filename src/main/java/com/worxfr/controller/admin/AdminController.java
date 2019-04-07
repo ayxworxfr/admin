@@ -40,36 +40,4 @@ public class AdminController {
     public ServerResponse<String> update() {
         return ServerResponse.createBySuccess("success");
     }
-
-    /**
-     * 修改用户权限
-     */
-    @PostMapping("/updatepower")
-    public ServerResponse<String> updatePower() {
-        return ServerResponse.createBySuccess("success");
-    }
-
-    /**
-     * 批量修改用户权限
-     */
-    @PostMapping("/updatepowers")
-    public ServerResponse<String> updatePowers() {
-        return ServerResponse.createBySuccess("success");
-    }
-
-    /**
-     * 查询用户权限
-     */
-    @PostMapping("/searchpowers")
-    public ServerResponse<String> searchPowers() {
-        return ServerResponse.createBySuccess("success");
-    }
-
-    /**
-     * 删除用户权限
-     */
-    @PostMapping("/deletepowers")
-    public ServerResponse<String> deletePowers() {
-        return ServerResponse.createBySuccess("success");
-    }
 }
