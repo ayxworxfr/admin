@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worxfr.dao.ImpowerMapper">
+  <resultMap id="BaseResultMap" type="com.worxfr.pojo.Impower">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="from_id" jdbcType="BIGINT" property="fromId" />
+    <result column="to_id" jdbcType="BIGINT" property="toId" />
+    <result column="impower_time" jdbcType="TIMESTAMP" property="impowerTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.worxfr.pojo.Impower">
+    insert into impower (id, from_id, to_id, 
+      impower_time)
+    values (#{id,jdbcType=BIGINT}, #{fromId,jdbcType=BIGINT}, #{toId,jdbcType=BIGINT}, 
+      #{impowerTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.worxfr.pojo.Impower">
+    insert into impower
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fromId != null">
+        from_id,
+      </if>
+      <if test="toId != null">
+        to_id,
+      </if>
+      <if test="impowerTime != null">
+        impower_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fromId != null">
+        #{fromId,jdbcType=BIGINT},
+      </if>
+      <if test="toId != null">
+        #{toId,jdbcType=BIGINT},
+      </if>
+      <if test="impowerTime != null">
+        #{impowerTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
