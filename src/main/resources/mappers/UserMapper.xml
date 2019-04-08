@@ -97,7 +97,18 @@
 
 
 
-
+  <select id="checkUsername" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user
+    where username = #{username, jdbcType=VARCHAR}
+  </select>
+  <select id="checkEmail" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user
+    where email = #{email, jdbcType=VARCHAR}
+  </select>
   <select id="login" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -156,11 +167,5 @@
     from user
     where job_id = #{job_id,jdbcType=VARCHAR} and phone = #{phone,jdbcType=VARCHAR}
   </select>
-  <!--<update id="resetPassword" parameterType="com.worxfr.pojo.User">-->
-    <!--update-->
-    <!--user-->
-    <!--set password = #{password,jdbcType=VARCHAR}-->
-    <!--where job_id = #{job_id,jdbcType=VARCHAR} and phone = #{phone,jdbcType=VARCHAR}-->
-  <!--</update>-->
 
 </mapper>

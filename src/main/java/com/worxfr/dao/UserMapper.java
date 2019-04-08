@@ -6,6 +6,10 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
     int insert(User record);
 
+    int checkUsername(String username);
+
+    int checkEmail(String email);
+
     int insertSelective(User record);
 
     User login(@Param("username") String username, @Param("password") String password);

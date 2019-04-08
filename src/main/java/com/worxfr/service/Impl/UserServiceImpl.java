@@ -21,6 +21,18 @@ public class UserServiceImpl implements IUserService {
     UserMapper userMapper;
 
     @Override
+    public int checkUsername(String username) {
+        int count = userMapper.checkUsername(username);
+        return count;
+    }
+
+    @Override
+    public int checkEmail(String email) {
+        int count = userMapper.checkEmail(email);
+        return count;
+    }
+
+    @Override
     public User findUserById(Integer id) {
         User user = userMapper.findUserById(id);
         return user;

@@ -85,23 +85,23 @@ public class UserController {
 
 
     public ServerResponse<String> checkValid(String str,String type){
-//        if(org.apache.commons.lang3.StringUtils.isNotBlank(type)){
-//            //开始校验
-//            if(Const.USERNAME.equals(type)){
-//                int resultCount = userService.checkUsername(str);
-//                if(resultCount > 0 ){
-//                    return ServerResponse.createByErrorMessage("用户名已存在");
-//                }
-//            }
-//            if(Const.EMAIL.equals(type)){
-//                int resultCount = userService.checkEmail(str);
-//                if(resultCount > 0 ){
-//                    return ServerResponse.createByErrorMessage("email已存在");
-//                }
-//            }
-//        }else{
-//            return ServerResponse.createByErrorMessage("参数错误");
-//        }
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(type)){
+            //开始校验
+            if(Const.USERNAME.equals(type)){
+                int resultCount = userService.checkUsername(str);
+                if(resultCount > 0 ){
+                    return ServerResponse.createByErrorMessage("用户名已存在");
+                }
+            }
+            if(Const.EMAIL.equals(type)){
+                int resultCount = userService.checkEmail(str);
+                if(resultCount > 0 ){
+                    return ServerResponse.createByErrorMessage("email已存在");
+                }
+            }
+        }else{
+            return ServerResponse.createByErrorMessage("参数错误");
+        }
         return ServerResponse.createBySuccessMessage("校验成功");
     }
 }

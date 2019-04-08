@@ -6,6 +6,10 @@ import com.worxfr.pojo.User;
 
 public interface IUserService {
 
+    int checkUsername(String username);
+
+    int checkEmail(String email);
+
     User findUserById(Integer id);
 
     ServerResponse login(String userName, String password);
