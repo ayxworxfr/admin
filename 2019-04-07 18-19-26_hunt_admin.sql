@@ -44,10 +44,32 @@ CREATE TABLE `power_detail` (
 /*Data for the table `power_detail` */
 
 insert  into `power_detail`(`id`,`power`,`resource`) values 
-(1,1,'添加'),
-(2,2,'删除'),
-(3,3,'修改'),
-(4,4,'查找');
+(1,1,'查找'),
+(2,2,'修改'),
+(3,3,'删除'),
+(4,4,'添加');
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_code` varchar(255) DEFAULT NULL COMMENT '角色代号',
+  `role_name` varchar(255) DEFAULT NULL COMMENT '角色名称',
+  `powers` varchar(255) DEFAULT NULL COMMENT '角色对应权利',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+/*Data for the table `role` */
+
+insert  into `role`(`id`,`role_code`,`role_name`,`powers`) values 
+(1,'rc000001','超级管理员','1,2,3,4'),
+(2,'rc000002','普通管理员','1,2,3'),
+(3,'rc000003','客服经理','1,2'),
+(4,'rc000004','销售经理','1,2'),
+(5,'rc000005','客服专员','1'),
+(6,'rc000006','客服专员','1');
 
 /*Table structure for table `user_hunt` */
 
@@ -58,7 +80,7 @@ CREATE TABLE `user_hunt` (
   `job_id` varchar(100) DEFAULT NULL COMMENT '工号',
   `username` varchar(50) NOT NULL COMMENT '用户名',
   `password` varchar(50) NOT NULL COMMENT '用户密码，MD5加密',
-  `role` varchar(50) NOT NULL COMMENT '角色',
+  `role_code` varchar(50) NOT NULL COMMENT '角色',
   `organ` varchar(100) DEFAULT NULL COMMENT '组织',
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -70,11 +92,11 @@ CREATE TABLE `user_hunt` (
 
 /*Data for the table `user_hunt` */
 
-insert  into `user_hunt`(`id`,`job_id`,`username`,`password`,`role`,`organ`,`phone`,`email`,`create_time`,`update_time`) values 
-(1,'1700301235','admin','427338237BD929443EC5D48E24FD2B1A','1,2,3,4','worxfr','13800138000','admin@happymmall.com','2016-11-06 16:56:45','2017-04-04 19:27:36'),
-(13,'1700301221','geely','08E9A6EA287E70E7E3F7C982BF7923AC','1,2,4','worxfr','13800138000','geely@happymmall.com','2016-11-19 22:19:25','2016-11-19 22:19:25'),
-(17,'1700301625','rosen','095AC193FE2212EEC7A93E8FEFF11902','1,3,4','csdn','13800138000','rosen1@happymmall.com','2017-03-17 10:51:33','2017-04-09 23:13:26'),
-(21,'1700300215','soonerbetter','DE6D76FE7C40D5A1A8F04213F2BEFBEE','1','csdn','13800138000','test06@happymmall.com','2017-04-13 21:26:22','2017-04-13 21:26:22');
+insert  into `user_hunt`(`id`,`job_id`,`username`,`password`,`role_code`,`organ`,`phone`,`email`,`create_time`,`update_time`) values 
+(1,'1700301235','admin','123456','rc000001','worxfr','13800138000','admin@happymmall.com','2016-11-06 16:56:45','2017-04-04 19:27:36'),
+(13,'1700301221','geely','123456','rc000002','worxfr','13800138000','geely@happymmall.com','2016-11-19 22:19:25','2016-11-19 22:19:25'),
+(17,'1700301625','rosen','12345','rc000003','csdn','13800138000','rosen1@happymmall.com','2017-03-17 10:51:33','2017-04-09 23:13:26'),
+(21,'1700300215','sooner','1234','1','csdn','13800138000','test06@happymmall.com','2017-04-13 21:26:22','2017-04-13 21:26:22');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

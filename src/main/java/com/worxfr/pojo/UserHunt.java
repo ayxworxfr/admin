@@ -11,7 +11,7 @@ public class UserHunt {
 
     private String password;
 
-    private String role;
+    private String roleCode;
 
     private String organ;
 
@@ -55,12 +55,12 @@ public class UserHunt {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setRole(String role) {
-        this.role = role == null ? null : role.trim();
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
     public String getOrgan() {
