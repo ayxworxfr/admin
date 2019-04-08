@@ -1,15 +1,15 @@
 package com.worxfr.controller;
 
+import com.worxfr.annotation.UserLoginToken;
 import com.worxfr.common.Const;
 import com.worxfr.common.ServerResponse;
 import com.worxfr.pojo.User;
 import com.worxfr.service.IUserService;
+import com.worxfr.service.TokenService;
 import com.worxfr.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import top.jfunc.json.impl.JSONObject;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,17 +18,25 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @Autowired
+    TokenService tokenService;
+    @Autowired
     IUserService userService;
+
+    @UserLoginToken
+    @PostMapping("/getMessage")
+    public ServerResponse getMessage(){
+        return ServerResponse.createBySuccess("你已通过验证");
+    }
 
     /**
      * 用户登录
      */
     @PostMapping("/login")
-    public ServerResponse<User> login(User user) {
-//        String md5Password = user.getPassword();
+    public ServerResponse<JSONObject> login(User user, HttpSession session) {
         String md5Password = MD5Util.MD5EncodeUtf8(user.getPassword());
 
-        ServerResponse<User> serverResponse = userService.login(user.getUsername(), md5Password);
+        ServerResponse<JSONObject> serverResponse = userService.login(user.getUsername(), md5Password);
+        session.setAttribute(Const.CURRENT_USER, serverResponse.getData());         // 将信息存入session
         return serverResponse;
     }
 

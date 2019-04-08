@@ -5,6 +5,9 @@ import com.worxfr.common.ServerResponse;
 import com.worxfr.pojo.User;
 
 public interface IUserService {
+
+    User findUserById(Integer id);
+
     ServerResponse login(String userName, String password);
 
     ServerResponse regist(User user);

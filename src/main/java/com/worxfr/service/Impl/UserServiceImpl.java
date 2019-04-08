@@ -5,8 +5,10 @@ import com.worxfr.common.ServerResponse;
 import com.worxfr.dao.UserMapper;
 import com.worxfr.pojo.User;
 import com.worxfr.service.IUserService;
+import com.worxfr.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.jfunc.json.impl.JSONObject;
 
 import java.util.Date;
 
@@ -14,16 +16,30 @@ import java.util.Date;
 public class UserServiceImpl implements IUserService {
 
     @Autowired
+    TokenService tokenService;
+    @Autowired
     UserMapper userMapper;
 
     @Override
-    public ServerResponse login(String username, String password) {
+    public User findUserById(Integer id) {
+        User user = userMapper.findUserById(id);
+        return user;
+    }
+
+    @Override
+    public ServerResponse<JSONObject> login(String username, String password) {
         User user = userMapper.login(username, password);
 
         if(user == null)
-            return ServerResponse.createByErrorMessage("用户名或密码错误");
+            return ServerResponse.createByErrorMessage("登录失败, 用户名或密码错误");
 
-        return ServerResponse.createBySuccessMessage("登录成功", user);
+        // 这里使用的密码是加密后的密码
+        JSONObject jsonObject=new JSONObject();
+        String token = tokenService.getToken(user);
+        jsonObject.put("token", token);
+        jsonObject.put("user", user);
+
+        return ServerResponse.createBySuccessMessage("登录成功", jsonObject);
     }
 
     @Override

@@ -15,4 +15,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User user);
 
     User selectByJobId(String job_id);
+
+    User findUserById(Integer id);
 }
