@@ -3,6 +3,8 @@ package com.worxfr.dao;
 import com.worxfr.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     int insert(User record);
 
@@ -18,7 +20,15 @@ public interface UserMapper {
 
     int updateByPrimaryKeySelective(User user);
 
+    List<User> selectAllUser();
+
     User selectByJobId(String job_id);
 
     User findUserById(Integer id);
+
+    void deleteByJobId(String jobId);
+
+    int checkJobId(String jobId);
+
+    User loginAdmin(@Param("username") String username, @Param("password") String md5Password, @Param ("roleAdmin")String roleAdmin);
 }

@@ -97,6 +97,12 @@
 
 
 
+  <select id="checkJobId" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user
+    where job_id = #{jobId, jdbcType=VARCHAR}
+  </select>
   <select id="checkUsername" resultType="java.lang.Integer">
     select
     count(*)
@@ -114,6 +120,12 @@
     <include refid="Base_Column_List" />
     from user
     where username = #{username} and password = #{password}
+  </select>
+  <select id="loginAdmin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username} and password = #{password} and role_code = #{roleAdmin}
   </select>
   <select id="findUserById" resultMap="BaseResultMap">
     select
@@ -167,5 +179,13 @@
     from user
     where job_id = #{job_id,jdbcType=VARCHAR} and phone = #{phone,jdbcType=VARCHAR}
   </select>
-
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  <delete id="deleteByJobId">
+    delete from user
+    where job_id = #{jobId,jdbcType=VARCHAR}
+  </delete>
 </mapper>
