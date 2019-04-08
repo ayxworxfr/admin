@@ -5,7 +5,7 @@ import com.worxfr.common.ServerResponse;
 import com.worxfr.pojo.UserHunt;
 
 public interface IUserService {
-    ServerResponse login(UserHunt userHunt);
+    ServerResponse login(String userName, String password);
 
     ServerResponse regist(UserHunt userHunt);
 

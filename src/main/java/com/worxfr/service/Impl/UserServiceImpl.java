@@ -17,20 +17,21 @@ public class UserServiceImpl implements IUserService {
     UserHuntMapper userHuntMapper;
 
     @Override
-    public ServerResponse login(UserHunt userHunt) {
-        UserHunt userHunt1 = userHuntMapper.login(userHunt.getJobId(), userHunt.getPassword());
+    public ServerResponse login(String username, String password) {
+        UserHunt userHunt = userHuntMapper.login(username, password);
 
-        if(userHunt1 == null)
+        if(userHunt == null)
             return ServerResponse.createByErrorMessage("用户名或密码错误");
 
-        return ServerResponse.createBySuccessMessage("登录成功", userHunt1);
+        return ServerResponse.createBySuccessMessage("登录成功", userHunt);
     }
 
     @Override
     public ServerResponse regist(UserHunt userHunt) {
-        Date updateTime = new Date();
-        userHunt.setUpdateTime(updateTime);
-        int result = userHuntMapper.insert(userHunt);
+        Date time = new Date();
+        userHunt.setCreateTime(time);
+        userHunt.setUpdateTime(time);
+        int result = userHuntMapper.insertSelective(userHunt);
 
         if(result <= 0)
             return ServerResponse.createByErrorMessage("注册失败");

@@ -102,41 +102,38 @@
     select
     <include refid="Base_Column_List" />
     from user_hunt
-    where job_id = #{job_id} and password = #{password}
+    where username = #{username} and password = #{password}
   </select>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.worxfr.pojo.UserHunt">
-    update student
+    update user_hunt
     <set>
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        id = #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="question != null">
-        #{question,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null">
-        #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="role != null">
-        #{role,jdbcType=BIGINT},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -145,6 +142,19 @@
     select
     <include refid="Base_Column_List" />
     from user_hunt
-    where job_id = #{job_id,jdbcType=BIGINT}
+    where job_id = #{job_id,jdbcType=VARCHAR}
   </select>
+  <select id="resetPassword" parameterType="com.worxfr.pojo.UserHunt" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_hunt
+    where job_id = #{job_id,jdbcType=VARCHAR} and phone = #{phone,jdbcType=VARCHAR}
+  </select>
+  <!--<update id="resetPassword" parameterType="com.worxfr.pojo.UserHunt">-->
+    <!--update-->
+    <!--user_hunt-->
+    <!--set password = #{password,jdbcType=VARCHAR}-->
+    <!--where job_id = #{job_id,jdbcType=VARCHAR} and phone = #{phone,jdbcType=VARCHAR}-->
+  <!--</update>-->
+
 </mapper>

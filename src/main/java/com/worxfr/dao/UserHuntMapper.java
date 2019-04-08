@@ -8,7 +8,9 @@ public interface UserHuntMapper {
 
     int insertSelective(UserHunt record);
 
-    UserHunt login(@Param("job_id") String jobId, @Param("password") String password);
+    UserHunt login(@Param("username") String username, @Param("password") String password);
+
+//    int resetPasswordCheck(@Param("job_id") String jobId, @Param("phone") String phone);
 
     UserHunt resetPassword(@Param("job_id") String jobId, @Param("phone") String phone);
 
