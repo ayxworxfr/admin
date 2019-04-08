@@ -1,5 +1,6 @@
 package com.worxfr.controller;
 
+import com.worxfr.annotation.PassToken;
 import com.worxfr.annotation.UserLoginToken;
 import com.worxfr.common.Const;
 import com.worxfr.common.ServerResponse;
@@ -7,12 +8,14 @@ import com.worxfr.pojo.User;
 import com.worxfr.service.IUserService;
 import com.worxfr.service.TokenService;
 import com.worxfr.utils.MD5Util;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.jfunc.json.impl.JSONObject;
 
 import javax.servlet.http.HttpSession;
 
+@UserLoginToken
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -31,6 +34,7 @@ public class UserController {
     /**
      * 用户登录
      */
+    @PassToken
     @PostMapping("/login")
     public ServerResponse<JSONObject> login(User user, HttpSession session) {
         String md5Password = MD5Util.MD5EncodeUtf8(user.getPassword());
@@ -43,6 +47,7 @@ public class UserController {
     /**
      * 用户注册
      */
+    @PassToken
     @PostMapping("/regist")
     public ServerResponse<String> regist(User user) {
         ServerResponse validResponse = this.checkValid(user.getUsername(),Const.USERNAME);
@@ -64,6 +69,7 @@ public class UserController {
     /**
      * 用户重置密码
      */
+    @PassToken
     @PostMapping("/resetpassword")
     public ServerResponse<String> resetPassword(User user) {
         //MD5加密
@@ -76,8 +82,9 @@ public class UserController {
      * 展示用户个人信息
      */
     @PostMapping("/message")
-    public ServerResponse<String> userMessage(String jobId) {
-        ServerResponse<String> serverResponse = userService.userMessage(jobId);
+    public ServerResponse<String> userMessage(HttpSession httpSession) {
+        int id = Integer.parseInt(tokenService.getUserIdByToken(tokenService.getTokenBySession(httpSession)));
+        ServerResponse<String> serverResponse = userService.userMessage(id);
         return serverResponse;
     }
 

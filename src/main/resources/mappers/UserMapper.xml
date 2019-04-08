@@ -155,7 +155,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByJobId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByJobId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user

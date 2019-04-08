@@ -49,8 +49,9 @@ public class UserServiceImpl implements IUserService {
         JSONObject jsonObject=new JSONObject();
         String token = tokenService.getToken(user);
         jsonObject.put("token", token);
-        jsonObject.put("user", user);
 
+        user.setPassword("");
+        jsonObject.put("user", user);
         return ServerResponse.createBySuccessMessage("登录成功", jsonObject);
     }
 
@@ -83,12 +84,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ServerResponse userMessage(String jobId) {
-        User user = userMapper.selectByJobId(jobId);
+    public ServerResponse userMessage(Integer id) {
+        User user = userMapper.findUserById(id);
 
         if(user == null)
-            return ServerResponse.createByErrorMessage("没有该用户失败");
+            return ServerResponse.createByErrorMessage("没有该用户");
 
+        user.setPassword("");
         return ServerResponse.createBySuccess(user);
     }
 }

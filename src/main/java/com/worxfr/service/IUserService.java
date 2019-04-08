@@ -18,5 +18,5 @@ public interface IUserService {
 
     ServerResponse resetPassword(String jobId, String phone, String password);
 
-    ServerResponse<String> userMessage(String jobId);
+    ServerResponse<String> userMessage(Integer id);
 }
