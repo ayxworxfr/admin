@@ -2,18 +2,18 @@ package com.worxfr.service;
 
 
 import com.worxfr.common.ServerResponse;
-import com.worxfr.pojo.UserHunt;
+import com.worxfr.pojo.User;
 
 public interface IPowerService {
-    ServerResponse add(UserHunt userHunt);
+    ServerResponse add(User user);
 
-    ServerResponse delete(UserHunt userHunt);
+    ServerResponse delete(User user);
 
-    ServerResponse update(UserHunt userHunt);
+    ServerResponse update(User user);
 
-    ServerResponse deletes(UserHunt userHunt);        // 批量删除权限
+    ServerResponse deletes(User user);        // 批量删除权限
 
-    ServerResponse search(UserHunt userHunt);
+    ServerResponse search(User user);
 
 
 }

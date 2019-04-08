@@ -1,8 +1,8 @@
-package com.worxfr.controller.userhunt;
+package com.worxfr.controller;
 
 import com.worxfr.common.Const;
 import com.worxfr.common.ServerResponse;
-import com.worxfr.pojo.UserHunt;
+import com.worxfr.pojo.User;
 import com.worxfr.service.IUserService;
 import com.worxfr.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
-public class UserHuntController {
+public class UserController {
 
     @Autowired
     IUserService userService;
@@ -24,11 +24,11 @@ public class UserHuntController {
      * 用户登录
      */
     @PostMapping("/login")
-    public ServerResponse<UserHunt> login(UserHunt userHunt) {
-//        String md5Password = userHunt.getPassword();
-        String md5Password = MD5Util.MD5EncodeUtf8(userHunt.getPassword());
+    public ServerResponse<User> login(User user) {
+//        String md5Password = user.getPassword();
+        String md5Password = MD5Util.MD5EncodeUtf8(user.getPassword());
 
-        ServerResponse<UserHunt> serverResponse = userService.login(userHunt.getUsername(), md5Password);
+        ServerResponse<User> serverResponse = userService.login(user.getUsername(), md5Password);
         return serverResponse;
     }
 
@@ -36,19 +36,19 @@ public class UserHuntController {
      * 用户注册
      */
     @PostMapping("/regist")
-    public ServerResponse<String> regist(UserHunt userHunt) {
-        ServerResponse validResponse = this.checkValid(userHunt.getUsername(),Const.USERNAME);
+    public ServerResponse<String> regist(User user) {
+        ServerResponse validResponse = this.checkValid(user.getUsername(),Const.USERNAME);
         if(!validResponse.isSuccess()){
             return validResponse;
         }
-        validResponse = this.checkValid(userHunt.getEmail(),Const.EMAIL);
+        validResponse = this.checkValid(user.getEmail(),Const.EMAIL);
         if(!validResponse.isSuccess()){
             return validResponse;
         }
-        userHunt.setRoleCode(Const.RoleCode.ROLE_USER);
+        user.setRoleCode(Const.RoleCode.ROLE_USER);
         //MD5加密
-        userHunt.setPassword(MD5Util.MD5EncodeUtf8(userHunt.getPassword()));
-        ServerResponse serverResponse = userService.regist(userHunt);
+        user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
+        ServerResponse serverResponse = userService.regist(user);
 
         return serverResponse;
     }
@@ -57,10 +57,10 @@ public class UserHuntController {
      * 用户重置密码
      */
     @PostMapping("/resetpassword")
-    public ServerResponse<String> resetPassword(UserHunt userHunt) {
+    public ServerResponse<String> resetPassword(User user) {
         //MD5加密
-        userHunt.setPassword(MD5Util.MD5EncodeUtf8(userHunt.getPassword()));
-        ServerResponse<String> serverResponse = userService.resetPassword(userHunt.getJobId(),userHunt.getPhone(),userHunt.getPassword());
+        user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
+        ServerResponse<String> serverResponse = userService.resetPassword(user.getJobId(),user.getPhone(),user.getPassword());
         return serverResponse;
     }
 

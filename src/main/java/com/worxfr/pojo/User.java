@@ -2,7 +2,7 @@ package com.worxfr.pojo;
 
 import java.util.Date;
 
-public class UserHunt {
+public class User {
     private Integer id;
 
     private String jobId;

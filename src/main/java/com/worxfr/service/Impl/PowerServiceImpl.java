@@ -2,8 +2,8 @@ package com.worxfr.service.Impl;
 
 
 import com.worxfr.common.ServerResponse;
-import com.worxfr.dao.UserHuntMapper;
-import com.worxfr.pojo.UserHunt;
+import com.worxfr.dao.UserMapper;
+import com.worxfr.pojo.User;
 import com.worxfr.service.IPowerService;
 import com.worxfr.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,30 +15,30 @@ import java.util.Date;
 public class PowerServiceImpl implements IPowerService {
 
     @Autowired
-    UserHuntMapper userHuntMapper;
+    UserMapper userMapper;
 
     @Override
-    public ServerResponse add(UserHunt userHunt) {
+    public ServerResponse add(User user) {
         return null;
     }
 
     @Override
-    public ServerResponse delete(UserHunt userHunt) {
+    public ServerResponse delete(User user) {
         return null;
     }
 
     @Override
-    public ServerResponse update(UserHunt userHunt) {
+    public ServerResponse update(User user) {
         return null;
     }
 
     @Override
-    public ServerResponse deletes(UserHunt userHunt) {
+    public ServerResponse deletes(User user) {
         return null;
     }
 
     @Override
-    public ServerResponse search(UserHunt userHunt) {
+    public ServerResponse search(User user) {
         return null;
     }
 }

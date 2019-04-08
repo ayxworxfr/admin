@@ -14,7 +14,7 @@ public class ManageController {
      */
     @PostMapping("/delete")
     public ServerResponse delete() {
-//        ServerResponse<UserHunt> serverResponse = studentService.login(sno, password);
+//        ServerResponse<User> serverResponse = studentService.login(sno, password);
         return ServerResponse.createBySuccess("success");
     }
 }

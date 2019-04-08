@@ -2,8 +2,8 @@ package com.worxfr.service.Impl;
 
 
 import com.worxfr.common.ServerResponse;
-import com.worxfr.dao.UserHuntMapper;
-import com.worxfr.pojo.UserHunt;
+import com.worxfr.dao.UserMapper;
+import com.worxfr.pojo.User;
 import com.worxfr.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,24 +14,24 @@ import java.util.Date;
 public class UserServiceImpl implements IUserService {
 
     @Autowired
-    UserHuntMapper userHuntMapper;
+    UserMapper userMapper;
 
     @Override
     public ServerResponse login(String username, String password) {
-        UserHunt userHunt = userHuntMapper.login(username, password);
+        User user = userMapper.login(username, password);
 
-        if(userHunt == null)
+        if(user == null)
             return ServerResponse.createByErrorMessage("用户名或密码错误");
 
-        return ServerResponse.createBySuccessMessage("登录成功", userHunt);
+        return ServerResponse.createBySuccessMessage("登录成功", user);
     }
 
     @Override
-    public ServerResponse regist(UserHunt userHunt) {
+    public ServerResponse regist(User user) {
         Date time = new Date();
-        userHunt.setCreateTime(time);
-        userHunt.setUpdateTime(time);
-        int result = userHuntMapper.insertSelective(userHunt);
+        user.setCreateTime(time);
+        user.setUpdateTime(time);
+        int result = userMapper.insertSelective(user);
 
         if(result <= 0)
             return ServerResponse.createByErrorMessage("注册失败");
@@ -41,26 +41,26 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ServerResponse resetPassword(String jobId, String phone, String password) {
-        UserHunt userHunt = userHuntMapper.resetPassword(jobId, phone);
+        User user = userMapper.resetPassword(jobId, phone);
 
-        if(userHunt == null)
+        if(user == null)
             return ServerResponse.createByErrorMessage("密码重置失败");
 
         Date updateTime = new Date();
-        userHunt.setUpdateTime(updateTime);
-        userHunt.setPassword(password);
-        userHuntMapper.updateByPrimaryKeySelective(userHunt);
+        user.setUpdateTime(updateTime);
+        user.setPassword(password);
+        userMapper.updateByPrimaryKeySelective(user);
 
         return ServerResponse.createBySuccessMessage("密码重置成功");
     }
 
     @Override
     public ServerResponse userMessage(String jobId) {
-        UserHunt userHunt = userHuntMapper.selectByJobId(jobId);
+        User user = userMapper.selectByJobId(jobId);
 
-        if(userHunt == null)
+        if(user == null)
             return ServerResponse.createByErrorMessage("没有该用户失败");
 
-        return ServerResponse.createBySuccess(userHunt);
+        return ServerResponse.createBySuccess(user);
     }
 }

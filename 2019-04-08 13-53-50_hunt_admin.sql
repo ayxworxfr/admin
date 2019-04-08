@@ -69,13 +69,13 @@ insert  into `role`(`id`,`role_code`,`role_name`,`powers`) values
 (3,'rc000003','客服经理','1,2'),
 (4,'rc000004','销售经理','1,2'),
 (5,'rc000005','客服专员','1'),
-(6,'rc000006','客服专员','1');
+(6,'rc000006','普通用户','1');
 
-/*Table structure for table `user_hunt` */
+/*Table structure for table `user` */
 
-DROP TABLE IF EXISTS `user_hunt`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `user_hunt` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户表id',
   `job_id` varchar(100) DEFAULT NULL COMMENT '工号',
   `username` varchar(50) NOT NULL COMMENT '用户名',
@@ -88,15 +88,17 @@ CREATE TABLE `user_hunt` (
   `update_time` datetime NOT NULL COMMENT '最后一次更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name_unique` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
-/*Data for the table `user_hunt` */
+/*Data for the table `user` */
 
-insert  into `user_hunt`(`id`,`job_id`,`username`,`password`,`role_code`,`organ`,`phone`,`email`,`create_time`,`update_time`) values 
-(1,'1700301235','admin','123456','rc000001','worxfr','13800138000','admin@happymmall.com','2016-11-06 16:56:45','2017-04-04 19:27:36'),
-(13,'1700301221','geely','123456','rc000002','worxfr','13800138000','geely@happymmall.com','2016-11-19 22:19:25','2016-11-19 22:19:25'),
+insert  into `user`(`id`,`job_id`,`username`,`password`,`role_code`,`organ`,`phone`,`email`,`create_time`,`update_time`) values 
+(1,'1700301235','admin','EE3120EFDF18F9641397CD691BCC0F51','rc000001','worxfr','13800138000','admin@happymmall.com','2016-11-06 16:56:45','2019-04-08 13:53:24'),
+(13,'1700301221','geely','EE3120EFDF18F9641397CD691BCC0F51','rc000002','worxfr','13800138000','geely@happymmall.com','2016-11-19 22:19:25','2016-11-19 22:19:25'),
 (17,'1700301625','rosen','12345','rc000003','csdn','13800138000','rosen1@happymmall.com','2017-03-17 10:51:33','2017-04-09 23:13:26'),
-(21,'1700300215','sooner','1234','1','csdn','13800138000','test06@happymmall.com','2017-04-13 21:26:22','2017-04-13 21:26:22');
+(21,'1700300215','sooner','1234','1','csdn','13800138000','test06@happymmall.com','2017-04-13 21:26:22','2017-04-13 21:26:22'),
+(22,'1600300818','zj','EE3120EFDF18F9641397CD691BCC0F51','rc000006',NULL,NULL,NULL,'2019-04-08 12:22:23','2019-04-08 12:22:23'),
+(23,'1700301224','ymh','EE3120EFDF18F9641397CD691BCC0F51','rc000006',NULL,NULL,NULL,'2019-04-08 12:35:28','2019-04-08 12:35:28');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
