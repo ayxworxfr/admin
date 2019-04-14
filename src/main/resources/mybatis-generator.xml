@@ -17,6 +17,7 @@
                         connectionURL="jdbc:mysql://localhost:3306/ai_exam?serverTimezone=GMT%2B8"
                         userId="root"
                         password="123456">
+            <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
         <!--这东西不用管-->
